@@ -22,7 +22,7 @@ const Register = () => {
                         <span className="label-text">Name</span>
                     </label>
                     <input {...register("name", { required: true })} type="text" name="name" placeholder="Name" className="input input-bordered" />
-                    {errors.exampleRequired && <span>This field is required</span>}
+                    {errors.name && <span>Your Name is required</span>}
                 </div>
                 
                 <div className="form-control">
@@ -30,7 +30,7 @@ const Register = () => {
                         <span className="label-text">Photo</span>
                     </label>
                     <input {...register("photo", { required: true })} type="file" name="photo" placeholder="Photo" className="input input-bordered" />
-                    {errors.exampleRequired && <span>This field is required</span>}
+                    {errors.Photo && <span>Your Photo is required</span>}
                 </div>
                 
                 <div className="form-control">
@@ -38,7 +38,7 @@ const Register = () => {
                         <span className="label-text">Email</span>
                     </label>
                     <input {...register("email", { required: true })} type="text" name="email" placeholder="Email" className="input input-bordered" />
-                    {errors.exampleRequired && <span>This field is required</span>}
+                    {errors.email && <span>Your email is required</span>}
                 </div>
                 
                 <div className="form-control">
@@ -46,7 +46,7 @@ const Register = () => {
                         <span className="label-text">Password</span>
                     </label>
                     <input {...register("password", { required: true })} type="text" name="password" placeholder="Password" className="input input-bordered" />
-                    {errors.exampleRequired && <span>This field is required</span>}
+                    {errors.password && <span>This field is required</span>}
                 </div>
                 
                
