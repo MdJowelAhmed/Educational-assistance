@@ -10,8 +10,8 @@ import {
     signOut,
     updateProfile,
 } from 'firebase/auth'
-import { app } from '../Firebase/Firebase.config'
 import useAxiosPublic from '../components/hooks/useAxiosPublic'
+import app from '../../firebase/Firebase.config'
 
 
 export const AuthContext = createContext(null)
