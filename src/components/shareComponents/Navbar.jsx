@@ -1,7 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { RxAvatar } from "react-icons/rx";
 
 
 const Navbar = () => {
+    const {user}=useAuth()
 const navLinks=<>
     <li><NavLink to='/' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500" : "btn mx-3"}>Home</NavLink></li>
     <li><NavLink to='/allScholarship' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500" : "btn  mx-3"}>All Scholarship</NavLink></li>
@@ -30,6 +33,10 @@ const navLinks=<>
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {
+                        user?<img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /> :<RxAvatar className="w-16 h-16 rounded-full"/>
+                    }
+                    
                     <Link to='/register'>Register</Link>
                 </div>
             </div>

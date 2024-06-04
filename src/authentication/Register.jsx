@@ -4,7 +4,7 @@ import { imageUpload } from "../api/ImageApi";
 
 
 const Register = () => {
-    // const {createUser, updateUserProfile}=useAuth()
+    const {createUser, updateUserProfile}=useAuth()
     const {
         register,
         handleSubmit,
@@ -13,11 +13,14 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        const image=data.photo[0]
-        console.log(image)
        
-        // createUser(data.email,data.password)
-        // const image_url =  imageUpload()
+       
+        createUser(data.email,data.password)
+       .then(result=>{
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        
+       })
     }
 
     return (
@@ -47,7 +50,7 @@ const Register = () => {
                                 <span className="label-text">Photo</span>
                             </label>
                             <input {...register("photo", { required: true })} type="file" name="photo" placeholder="Photo" className="input input-bordered" />
-                            {errors.Photo && <span>Your Photo is required</span>}
+                            {errors.photo && <span>Your Photo is required</span>}
                         </div>
 
                         <div className="form-control">
@@ -62,7 +65,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password", { required: true })} type="password" name="password" placeholder="Password" className="input input-bordered" />
+                            <input {...register("password", { required: true })} type="password" name="password" placeholder="*****" className="input input-bordered" />
                             {errors.password && <span>This field is required</span>}
                         </div>
 
