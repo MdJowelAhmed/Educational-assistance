@@ -1,16 +1,23 @@
 import { useForm } from "react-hook-form";
+import useAuth from "../Hooks/useAuth";
+import { imageUpload } from "../api/ImageApi";
 
 
 const Register = () => {
+    // const {createUser, updateUserProfile}=useAuth()
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm()
 
     const onSubmit = (data) => {
         console.log(data)
+        const image=data.photo[0]
+        console.log(image)
+       
+        // createUser(data.email,data.password)
+        // const image_url =  imageUpload()
     }
 
     return (
@@ -22,7 +29,7 @@ const Register = () => {
             </div>
             <div className="flex lg:gap-7">
                 <div>
-                    <img  className="rounded-full" src="https://img.freepik.com/free-photo/3d-render-checklist-clipboard-hand-pencil_107791-15683.jpg?t=st=1717418503~exp=1717422103~hmac=5fbf9be0afe4c87cd6db1506a728b18f9d34c5b984a1e3b6026e5e04d156c795&w=826" alt="" />
+                    <img  className="rounded-b-full rounded-t-2xl" src="https://img.freepik.com/free-photo/3d-render-checklist-clipboard-hand-pencil_107791-15683.jpg?t=st=1717418503~exp=1717422103~hmac=5fbf9be0afe4c87cd6db1506a728b18f9d34c5b984a1e3b6026e5e04d156c795&w=826" alt="" />
                 </div>
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-[500px] m-2 mx-auto">
@@ -55,7 +62,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password", { required: true })} type="text" name="password" placeholder="Password" className="input input-bordered" />
+                            <input {...register("password", { required: true })} type="password" name="password" placeholder="Password" className="input input-bordered" />
                             {errors.password && <span>This field is required</span>}
                         </div>
 
