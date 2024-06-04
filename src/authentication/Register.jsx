@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import { imageUpload } from "../api/ImageApi";
+import { Link } from "react-router-dom";
 
 
 const Register = () => {
-    const {createUser, updateUserProfile}=useAuth()
+    const { createUser, updateUserProfile } = useAuth()
     const {
         register,
         handleSubmit,
@@ -13,29 +14,29 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-       
-       
-        createUser(data.email,data.password)
-       .then(result=>{
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        
-       })
+
+
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+
+            })
     }
 
     return (
         <div className="bg-slate-200 p-12 rounded-3xl">
             <div className="w-[500px] m-2 mx-auto">
-                <h2 className="text-center text-2xl font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 text-amber-100">
+                <h2 className="text-center text-2xl font-semibold rounded-3xl py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-amber-100 mb-12">
                     CREATE A NEW ACCOUNT
                 </h2>
             </div>
             <div className="flex lg:gap-7">
                 <div>
-                    <img  className="rounded-b-full rounded-t-2xl" src="https://img.freepik.com/free-photo/3d-render-checklist-clipboard-hand-pencil_107791-15683.jpg?t=st=1717418503~exp=1717422103~hmac=5fbf9be0afe4c87cd6db1506a728b18f9d34c5b984a1e3b6026e5e04d156c795&w=826" alt="" />
+                    <img className="rounded-b-full rounded-tl-full lg:mt-20" src="https://img.freepik.com/free-photo/3d-render-checklist-clipboard-hand-pencil_107791-15683.jpg?t=st=1717418503~exp=1717422103~hmac=5fbf9be0afe4c87cd6db1506a728b18f9d34c5b984a1e3b6026e5e04d156c795&w=826" alt="" />
                 </div>
-                <div>
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-[500px] m-2 mx-auto">
+                <div className="bg-base-100 rounded-3xl">
+                    <form onSubmit={handleSubmit(onSubmit)} className="w-[500px] m-2 mx-auto lg:p-12">
 
                         <div className="form-control">
                             <label className="label">
@@ -73,6 +74,9 @@ const Register = () => {
 
                         <input type="submit" value="Register" className="btn bg-gradient-to-r from-cyan-500 to-blue-500 w-full" />
                     </form>
+                    <div className="">
+                        <p className="text-center mb-5">Already have a account? please <Link to='/login'> <span className="text-blue-600 font-bold" >Login</span></Link> </p>
+                    </div>
                 </div>
             </div>
         </div>
