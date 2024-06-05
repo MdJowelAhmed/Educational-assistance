@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import useAuth from "../../../Hooks/useAuth";
 
 
 const AddScholarShipForm = () => {
+    const {user}=useAuth()
 
     const {
         register,
@@ -142,18 +144,18 @@ const AddScholarShipForm = () => {
                         <div className="flex gap-4 md:gap-8">
                             <div className="form-control w-full">
                                 <label className="label">
-                                    <span className="label-text">Email</span>
+                                    <span className="label-text">Scholarship post date</span>
                                 </label>
-                                <input {...register("email", { required: true })} type="text" name="email" placeholder="Email" className="input input-bordered" />
-                                {errors.email && <span>Your email is must give this field</span>}
+                                <input {...register("postDate", { required: true })} type="text" name="postDate" placeholder="Scholarship post date" className="input input-bordered" />
+                                {errors.postDate && <span>Your email is must give this field</span>}
                             </div>
 
                             <div className="form-control w-full">
                                 <label className="label">
-                                    <span className="label-text">Email</span>
+                                    <span className="label-text">Deadline</span>
                                 </label>
-                                <input {...register("email", { required: true })} type="text" name="email" placeholder="Email" className="input input-bordered" />
-                                {errors.email && <span>Your email is must give this field</span>}
+                                <input {...register("deadline", { required: true })} type="text" name="deadline" placeholder="Deadline" className="input input-bordered" />
+                                {errors.deadline && <span>Your email is must give this field</span>}
                             </div>
                         </div>
 
@@ -164,7 +166,7 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input {...register("email", { required: true })} type="text" name="email" placeholder="Email" className="input input-bordered" />
+                                <input {...register("email", { required: true })} type="text" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" />
                                 {errors.email && <span>Your email is must give this field</span>}
                             </div>
                         </div>
