@@ -3,8 +3,8 @@
 const AllScholarship = () => {
     return (
         <div>
-            AllScholarship
-            AllScholarship
+            <p className="font-lato">AllScholarship
+            AllScholarship</p>
         </div>
     );
 };

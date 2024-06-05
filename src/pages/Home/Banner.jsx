@@ -34,9 +34,9 @@ const Banner = () => {
                     </div>
                     <div className='absolute top-0 text-white bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-full  rounded-2xl'>
                         <div className=''>
-                            <h2 className='text-5xl font-semibold font-poppins max-w-md pt-20 lg:pl-20 pb-3 text-amber-200'>Get ScholarShip With Us and Secure.</h2>
+                            <h2 className='text-5xl font-semibold font-poppins max-w-md pt-20 lg:pl-20 font-lato pb-3 text-amber-200'>Get ScholarShip With Us and Secure.</h2>
 
-                            <p className='text-sm font-poppins max-w-lg pl-20'>Get your scholarship various country and various families.Download our application from and be pari advancing education of your favourite country</p>
+                            <p className='text-sm font-poppins max-w-lg pl-20 font-lato'>Get your scholarship various country and various families.Download our application from and be pari advancing education of your favourite country</p>
 
                             <div className='flex lg:gap-20 lg:ml-20'>
                                 <div className='flex justify-center pt-10'>
@@ -58,7 +58,7 @@ const Banner = () => {
                     <div className='absolute top-0 text-white bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-full  rounded-2xl'>
                         <h2 className='text-5xl font-semibold font-poppins max-w-md pt-20 lg:pl-20 pb-3 text-amber-200'>Scholarships to Nurture Your Educational Dreams</h2>
 
-                        <p className='text-sm font-poppins max-w-lg pl-20'>Support your academic journey with our nurturing scholarship programs. Personalized aid to help you grow and succeed in your studies.</p>
+                        <p className='text-sm font-poppins max-w-lg pl-20 font-lato'>Support your academic journey with our nurturing scholarship programs. Personalized aid to help you grow and succeed in your studies.</p>
 
                         <div className='flex lg:gap-20 lg:ml-20'>
                             <div className='flex justify-center pt-10'>

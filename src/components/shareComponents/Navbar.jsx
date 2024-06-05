@@ -40,7 +40,7 @@ const handleLogOut = () => {
                             navLinks
                         }
                         {
-                            user && <Link to='/dashboard'>Dashboard</Link>
+                            user && <Link to='/dashboard' className="btn">Dashboard</Link>
                         }
                     </ul>
                 </div>
