@@ -46,7 +46,7 @@ const handleLogOut = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user ? <img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /> : <RxAvatar className="w-16 h-16 rounded-full" />
+                        user && <img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /> 
                     }
 
                     <div>

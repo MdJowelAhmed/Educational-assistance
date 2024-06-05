@@ -95,13 +95,16 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password", { required: true })} type="password" name="password" placeholder="************" className="input input-bordered" />
-                            {errors.password && <span>This field is required</span>}
+                            <input {...register("password", { required: true , minLength:6,
+                                 pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/
+                            })} type="password" name="password" placeholder="************" className="input input-bordered" />
+                            {errors.password?.type==='required'&& <span className="text-red-600 font-lato">This field is required</span>}
+                            {errors.password?.type==='minLength'&& <span className="text-red-600 font-lato">Password must be min 6 characters</span>}
+                            {errors.password?.type==='pattern'&& <span className="text-red-600 font-lato">Password must have one Uppercase one lower case and one special character</span>}
+                           
                         </div>
 
-
-
-                        <input type="submit" value="Register" className="btn bg-gradient-to-r from-cyan-500 to-blue-500 w-full" />
+                        <input type="submit" value="Register" className="btn bg-gradient-to-r from-cyan-500 to-blue-500 w-full mt-10 text-white" />
                     </form>
                     <div className="text-center ">
 

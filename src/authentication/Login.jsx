@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const {user,signInWithGoogle}=useAuth()
+    const {user,signInWithGoogle,signIn}=useAuth()
     const navigate=useNavigate()
     const {
         register,
@@ -15,7 +15,20 @@ const Login = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        try{
+            await signIn(data.email,data.password)
+            navigate("/")
+            Swal.fire({
+                title: ` Login success!`,
+                text: "You clicked the button!",
+                icon: "success"
+              });
+            }
+              catch (err) {
+                console.log(err)
+                toast.error(err.message)
+            }
 
     }
 
