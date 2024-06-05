@@ -4,7 +4,9 @@ import Home from "../pages/Home/Home";
 import AllScholarship from "../pages/Home/AllScholarship/AllScholarship";
 import Register from "../authentication/Register";
 import Login from "../authentication/Login";
-import Dashboard from "../dashbord/Dashboard";
+// import Dashboard from "../dashbord/Dashboard";
+import AddScholarship from "../dashbord/moderator/addScholarship/AddScholarship";
+import Dashboard from "./Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -30,8 +32,14 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path:'/dashboard',
-        element:<Dashboard></Dashboard>
+        path:'dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'addScholarship',
+                element:<AddScholarship></AddScholarship>
+            }
+        ]
     }
 ])
 

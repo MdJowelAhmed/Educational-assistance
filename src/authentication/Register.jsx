@@ -1,27 +1,62 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import { imageUpload } from "../api/ImageApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 
+// const image_hosting_key = import.meta.env.IMAGE_SECRET_API;
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const Register = () => {
-    const { createUser, updateUserProfile } = useAuth()
+    const navigate = useNavigate()
+    const { createUser, updateUserProfile, signInWithGoogle } = useAuth()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        // const formData = new FormData();
+        // formData.append('image', data.image[0]);
+        const name = data.name;
+        console.log(name)
 
+        const image = data.image[0]
+        console.log(image)
 
-        createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
+        try {
+            const image_url = await imageUpload(image);
+            console.log(image_url)
+            if (image_url.data.success) {
+                console.log(image_url.data.data.url);
+            } else {
+                console.error('Upload failed:', image_url.data);
+            }
+            const result = await createUser(data.email, data.password)
+            console.log(result.user)
 
-            })
+            await updateUserProfile(name, image)
+            navigate('/')
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+    }
+
+    // social register 
+    const handleGoogleSignIn = async () => {
+        try {
+            await signInWithGoogle()
+
+            navigate('/')
+            toast.success('Signup Successful')
+        } catch (err) {
+            console.log(err)
+            toast.error(err.message)
+        }
     }
 
     return (
@@ -48,9 +83,9 @@ const Register = () => {
 
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Photo</span>
+                                <span className="label-text">Your Profile Image</span>
                             </label>
-                            <input {...register("photo", { required: true })} type="file" name="photo" placeholder="Photo" className="input input-bordered" />
+                            <input {...register("image", { required: true })} accept="image/*" type="file" name="image" placeholder="Your profile Image" className="input input-bordered" />
                             {errors.photo && <span>Your Photo is required</span>}
                         </div>
 
@@ -66,7 +101,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password", { required: true })} type="password" name="password" placeholder="*****" className="input input-bordered" />
+                            <input {...register("password", { required: true })} type="password" name="password" placeholder="************" className="input input-bordered" />
                             {errors.password && <span>This field is required</span>}
                         </div>
 
@@ -74,6 +109,10 @@ const Register = () => {
 
                         <input type="submit" value="Register" className="btn bg-gradient-to-r from-cyan-500 to-blue-500 w-full" />
                     </form>
+                    <div className="text-center ">
+
+                        <button onClick={() => handleGoogleSignIn(signInWithGoogle)} className="btn btn-outline text-center mb-6 font-poppins bg-white shadow-2xl"><span className="text-4xl"><FcGoogle /></span> Login with Google</button>
+                    </div>
                     <div className="">
                         <p className="text-center mb-5">Already have a account? please <Link to='/login'> <span className="text-blue-600 font-bold" >Login</span></Link> </p>
                     </div>

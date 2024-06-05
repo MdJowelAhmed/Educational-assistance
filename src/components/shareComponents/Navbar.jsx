@@ -4,11 +4,17 @@ import { RxAvatar } from "react-icons/rx";
 
 
 const Navbar = () => {
-    const { user } = useAuth()
+    const { user, logOut } = useAuth()
     const navLinks = <>
         <li><NavLink to='/' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500 " : "btn mx-3"}>Home</NavLink></li>
         <li><NavLink to='/allScholarship' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500" : "btn  mx-3"}>All Scholarship</NavLink></li>
     </>
+
+const handleLogOut = () => {
+    logOut()
+        .then(() => { })
+        .catch(error => console.log(error));
+}
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -43,10 +49,14 @@ const Navbar = () => {
                         user ? <img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /> : <RxAvatar className="w-16 h-16 rounded-full" />
                     }
 
-                    <div className="flex gap-3">
-                        <Link to='/login'>Login</Link>
-                        <p>/</p>
-                        <Link to='/register'>Register</Link>
+                    <div>
+                        {
+                            user ? <button onClick={handleLogOut} className="btn">Logout</button> : <div className="flex gap-3">
+                                <Link to='/login'>Login</Link>
+                                <p>/</p>
+                                <Link to='/register'>Register</Link>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
