@@ -21,8 +21,7 @@ const Register = () => {
     const onSubmit = async (data) => {
         // const formData = new FormData();
         // formData.append('image', data.image[0]);
-        const name = data.name;
-        console.log(name)
+       
 
         const image = data.image[0]
         console.log(image)
@@ -30,15 +29,10 @@ const Register = () => {
         try {
             const image_url = await imageUpload(image);
             console.log(image_url)
-            if (image_url.data.success) {
-                console.log(image_url.data.data.url);
-            } else {
-                console.error('Upload failed:', image_url.data);
-            }
             const result = await createUser(data.email, data.password)
             console.log(result.user)
 
-            await updateUserProfile(name, image)
+            await updateUserProfile(data.name, image_url)
             navigate('/')
         } catch (error) {
             console.error('Error:', error);

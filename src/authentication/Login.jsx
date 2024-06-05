@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -24,7 +25,11 @@ const Login = () => {
             await signInWithGoogle()
 
             navigate('/')
-            toast.success('Signup Successful')
+            Swal.fire({
+                title: ` Login success!`,
+                text: "You clicked the button!",
+                icon: "success"
+              });
         } catch (err) {
             console.log(err)
             toast.error(err.message)

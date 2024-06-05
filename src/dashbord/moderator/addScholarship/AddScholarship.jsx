@@ -1,9 +1,10 @@
+import AddScholarShipForm from "./AddScholarShipForm";
 
 
 const AddScholarship = () => {
     return (
         <div>
-            addScholarship
+           <AddScholarShipForm></AddScholarShipForm>
         </div>
     );
 };
