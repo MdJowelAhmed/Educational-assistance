@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 
 // const image_hosting_key = import.meta.env.IMAGE_SECRET_API;
@@ -24,16 +25,23 @@ const Register = () => {
        
 
         const image = data.image[0]
-        console.log(image)
+        // console.log(image)
 
         try {
             const image_url = await imageUpload(image);
-            console.log(image_url)
+            // console.log(image_url)
             const result = await createUser(data.email, data.password)
             console.log(result.user)
 
             await updateUserProfile(data.name, image_url)
             navigate('/')
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: `${data.name} register successfully`,
+                showConfirmButton: false,
+                timer: 1500
+              });
         } catch (error) {
             console.error('Error:', error);
         }
