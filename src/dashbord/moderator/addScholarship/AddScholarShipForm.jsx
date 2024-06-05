@@ -3,7 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 
 
 const AddScholarShipForm = () => {
-    const {user}=useAuth()
+    const { user } = useAuth()
 
     const {
         register,
@@ -11,12 +11,44 @@ const AddScholarShipForm = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
+        const image = data.image[0]
+        const postedInfo = {
+            name: user?.displayName,
+            image: user?.photoURL,
+            email: user?.email,
+          }
 
+        try {
+            const image_url = await imageUpload(image)
+            const addScholarshipData={
+                scholarshipName,
+                universityName,
+                universityCountry,
+                UniversityCity,
+                worldRange,
+                subjectsCategory,
+                scholarshipCategory,
+                degree,
+                tuitionFee,
+                applicationFee,
+                serviceCharge,
+                postDate,
+                deadline,
+                postedInfo,
+                image:image_url
+
+                
+            }
+        }catch (err) {
+            console.log(err)
+            toast.error(err.message)
+            setLoading(false)
     }
     return (
         <div>
             <div className="bg-base-100 rounded-3xl">
+
                 <form onSubmit={handleSubmit(onSubmit)} className=" m-2 mx-auto lg:p-12">
                     {/* scholarship and university name  */}
                     <div>
@@ -68,7 +100,7 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">University World Range</span>
                                 </label>
-                                <input {...register("range", { required: true })} type="text" name="range" placeholder="University World Range" className="input input-bordered" />
+                                <input {...register("worldRange", { required: true })} type="text" name="worldRange" placeholder="University World Range" className="input input-bordered" />
                                 {errors.range && <span>Your email is must give this field</span>}
                             </div>
                         </div>
@@ -78,7 +110,7 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">Subject category</span>
                                 </label>
-                                <select defaultValue="default" {...register('SubjectCategory', { required: true })}
+                                <select defaultValue="default" {...register('subjectCategory', { required: true })}
                                     className="select select-bordered w-full">
                                     <option disabled value="default">Select a Subject</option>
                                     <option value="agriculture">Agriculture</option>
@@ -91,7 +123,7 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">Scholarship category</span>
                                 </label>
-                                <select defaultValue="default" {...register('ScholarshipCategory', { required: true })}
+                                <select defaultValue="default" {...register('scholarshipCategory', { required: true })}
                                     className="select select-bordered w-full">
                                     <option disabled value="default">Select a  Category</option>
                                     <option value="fullFund">Full Fund</option>
@@ -166,13 +198,13 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input {...register("email", { required: true })} type="text" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" />
+                                <input {...register("email", { required: true })} type="text" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" disabled />
                                 {errors.email && <span>Your email is must give this field</span>}
                             </div>
                         </div>
                     </div>
 
-                    <input type="submit" value="Login" className="btn text-white text-xl bg-gradient-to-r from-cyan-500 to-blue-500 w-full my-10" />
+                    <input type="submit" value="Add Scholarship" className="btn text-white text-xl bg-gradient-to-r from-cyan-500 to-blue-500 w-full my-10" />
                 </form>
 
 
