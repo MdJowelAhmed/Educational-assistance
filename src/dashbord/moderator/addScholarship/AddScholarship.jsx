@@ -3,9 +3,13 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { imageUpload } from "../../../api/ImageApi";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 const AddScholarship = () => {
     const { user } = useAuth()
+    // const [startDate, setStartDate] = useState(new Date());
 
     const {
         register,
@@ -14,6 +18,7 @@ const AddScholarship = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
+        console.log(data)
         const image = data.image[0]
         console.log(image)
         const name = data.universityName
@@ -32,7 +37,7 @@ const AddScholarship = () => {
                 universityCountry: data.universityCountry,
                 UniversityCity: data.UniversityCity,
                 worldRange: data.worldRange,
-                subjectsCategory: data.subjectsCategory,
+                subjectCategory: data.subjectCategory,
                 scholarshipCategory: data.scholarshipCategory,
                 degree: data.degree,
                 tuitionFee: data.tuitionFee,
@@ -146,7 +151,7 @@ const AddScholarship = () => {
                                         <label className="label">
                                             <span className="label-text"> Degree category</span>
                                         </label>
-                                        <select defaultValue="default" {...register(' degree', { required: true })}
+                                        <select defaultValue="default" {...register('degree', { required: true })}
                                             className="select select-bordered w-full">
                                             <option disabled value="default">Select a Degree</option>
                                             <option value="diploma">Diploma</option>
@@ -163,21 +168,21 @@ const AddScholarship = () => {
                                         <label className="label">
                                             <span className="label-text"> Tuition fees</span>
                                         </label>
-                                        <input {...register("tuitionFee", { required: true })} type="text" name="tuitionFee" placeholder=" Tuition fees" className="input input-bordered" />
+                                        <input {...register("tuitionFee", { required: true })} type="number" name="tuitionFee" placeholder=" Tuition fees" className="input input-bordered" />
                                         {errors.tuitionFee && <span className="text-red-600 font-lato">please mention tuition fee</span>}
                                     </div>
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text"> Application fees</span>
                                         </label>
-                                        <input {...register("applicationFee", { required: true })} type="text" name="applicationFee" placeholder=" Application fees" className="input input-bordered" />
+                                        <input {...register("applicationFee", { required: true })} type="number" name="applicationFee" placeholder=" Application fees" className="input input-bordered" />
                                         {errors.applicationFee && <span className="text-red-600 font-lato">please mention application fee </span>}
                                     </div>
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text"> Service charge</span>
                                         </label>
-                                        <input {...register("serviceCharge", { required: true })} type="text" name="serviceCharge" placeholder=" Service charge" className="input input-bordered" />
+                                        <input {...register("serviceCharge", { required: true })} type="number" name="serviceCharge" placeholder=" Service charge" className="input input-bordered" />
                                         {errors.serviceCharge && <span className="text-red-600 font-lato">please mention service charge</span>}
                                     </div>
                                 </div>
@@ -188,7 +193,7 @@ const AddScholarship = () => {
                                         <label className="label">
                                             <span className="label-text">Scholarship post date</span>
                                         </label>
-                                        <input {...register("postDate", { required: true })} type="text" name="postDate" placeholder="Scholarship post date" className="input input-bordered" />
+                                        <input {...register("postDate", { required: true })} type="text" name="postDate" defaultValue={new Date().toLocaleString()} placeholder="Scholarship post date" className="input input-bordered" />
                                         {errors.postDate && <span className="text-red-600 font-lato">please inter this post date</span>}
                                     </div>
 
@@ -196,7 +201,7 @@ const AddScholarship = () => {
                                         <label className="label">
                                             <span className="label-text">Deadline</span>
                                         </label>
-                                        <input {...register("deadline", { required: true })} type="text" name="deadline" placeholder="Deadline" className="input input-bordered" />
+                                        <input {...register("deadline", { required: true })} type="date" name="deadline" placeholder="Deadline" className="input input-bordered" />
                                         {errors.deadline && <span className="text-red-600 font-lato"> Deadline is must give this field</span>}
                                     </div>
                                 </div>
