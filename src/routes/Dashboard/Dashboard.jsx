@@ -1,6 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import SidebarLinks from "../../dashbord/SideBarLinks/SidebarLinks";
 import { MdLibraryAdd, MdManageHistory } from "react-icons/md";
+import { RxAvatar } from "react-icons/rx";
+import { HiHome } from "react-icons/hi";
 
 
 const Dashboard = () => {
@@ -10,6 +12,10 @@ const Dashboard = () => {
                 <SidebarLinks label={'Add Scholarship'} address={'/dashboard/addScholarship'} icon={MdLibraryAdd}></SidebarLinks>
 
                 <SidebarLinks label={'Manage Scholarship'} address={'/dashboard/manageScholarship'} icon={MdManageHistory}></SidebarLinks>
+
+                <SidebarLinks label={'Moderator Profile'} address={'/dashboard/moderatorProfile'} icon={RxAvatar}></SidebarLinks>
+
+                <SidebarLinks label={'Home'} address={'/'} icon={HiHome}></SidebarLinks>
             </div>
            
             <div className="flex-1">

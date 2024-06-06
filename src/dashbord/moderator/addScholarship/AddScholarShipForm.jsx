@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
+import { toast } from "react-toastify";
+import { imageUpload } from "../../../api/ImageApi";
 
 
 const AddScholarShipForm = () => {
@@ -13,6 +15,9 @@ const AddScholarShipForm = () => {
 
     const onSubmit = async(data) => {
         const image = data.image[0]
+        console.log(image)
+        const name=data.universityName
+        console.log(name)
         const postedInfo = {
             name: user?.displayName,
             image: user?.photoURL,
@@ -22,29 +27,29 @@ const AddScholarShipForm = () => {
         try {
             const image_url = await imageUpload(image)
             const addScholarshipData={
-                scholarshipName,
-                universityName,
-                universityCountry,
-                UniversityCity,
-                worldRange,
-                subjectsCategory,
-                scholarshipCategory,
-                degree,
-                tuitionFee,
-                applicationFee,
-                serviceCharge,
-                postDate,
-                deadline,
+                scholarshipName:data.scholarshipName,
+                universityName:data.universityName,
+                universityCountry:data.universityCountry,
+                UniversityCity:data.UniversityCity,
+                worldRange:data.worldRange,
+                subjectsCategory:data.subjectsCategory,
+                scholarshipCategory:data.scholarshipCategory,
+                degree:data.degree,
+                tuitionFee:data.tuitionFee,
+                applicationFee:data.applicationFee,
+                serviceCharge:data.serviceCharge,
+                postDate:data.postDate,
+                deadline:data.deadline,
                 postedInfo,
                 image:image_url
-
-                
             }
+            console.log(addScholarshipData)
         }catch (err) {
             console.log(err)
             toast.error(err.message)
-            setLoading(false)
+            // setLoading(false)
     }
+}
     return (
         <div>
             <div className="bg-base-100 rounded-3xl">
@@ -75,8 +80,8 @@ const AddScholarShipForm = () => {
                                 <label className="label">
                                     <span className="label-text">University Image</span>
                                 </label>
-                                <input {...register("UniversityImage", { required: true })} type="text" name="UniversityImage" placeholder="University Image" className="input input-bordered" />
-                                {errors.UniversityImage && <span className="text-red-500 font-lato">Image is Required</span>}
+                                <input {...register("image", { required: true })} type="file" name="image" placeholder="University Image" className="input input-bordered" />
+                                {errors.image && <span className="text-red-500 font-lato">Image is Required</span>}
                             </div>
                             <div className="form-control w-full">
                                 <label className="label">

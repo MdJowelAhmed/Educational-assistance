@@ -8,6 +8,7 @@ import Login from "../authentication/Login";
 import AddScholarship from "../dashbord/moderator/addScholarship/AddScholarship";
 import Dashboard from "./Dashboard/Dashboard";
 import ManageScholarship from "../dashbord/moderator/manageScholarship/ManageScholarship";
+import ModeratorProfile from "../dashbord/moderator/moderatorProfile/ModeratorProfile";
 
 const router = createBrowserRouter([
     {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
             {
                 path:'manageScholarship',
                 element:<ManageScholarship></ManageScholarship>
-            }
+            },
+            {
+                path:'moderatorProfile',
+                element:<ModeratorProfile></ModeratorProfile>
+            },
         ]
     }
 ])
