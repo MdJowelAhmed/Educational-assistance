@@ -5,10 +5,16 @@ import { toast } from "react-toastify";
 import { imageUpload } from "../../../api/ImageApi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import useAxiosPublic from "../../../Hooks/usePublic";
 
 
 const AddScholarship = () => {
     const { user } = useAuth()
+    const axiosSecure=useAxiosSecure()
+    const axiosPublic=useAxiosPublic()
     // const [startDate, setStartDate] = useState(new Date());
 
     const {
@@ -18,19 +24,16 @@ const AddScholarship = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         const image = data.image[0]
-        console.log(image)
-        const name = data.universityName
-        console.log(name)
+        // console.log(image)
+       
         const postedInfo = {
             name: user?.displayName,
             image: user?.photoURL,
             email: user?.email,
         }
-
-        try {
-            const image_url = await imageUpload(image)
+        const image_url = await imageUpload(image)
             const addScholarshipData = {
                 scholarshipName: data.scholarshipName,
                 universityName: data.universityName,
@@ -47,13 +50,9 @@ const AddScholarship = () => {
                 deadline: data.deadline,
                 postedInfo,
                 image: image_url
-            }
-            console.log(addScholarshipData)
-        } catch (err) {
-            console.log(err)
-            toast.error(err.message)
-            // setLoading(false)
         }
+        const scholarshipRes=await axiosPublic.post('/scholarship',addScholarshipData)
+        console.log(scholarshipRes.data)
     }
     return (
         <div>
