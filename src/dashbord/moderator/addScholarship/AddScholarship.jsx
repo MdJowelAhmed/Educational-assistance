@@ -9,6 +9,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAxiosPublic from "../../../Hooks/usePublic";
+import Swal from "sweetalert2";
 
 
 const AddScholarship = () => {
@@ -26,7 +27,7 @@ const AddScholarship = () => {
     const onSubmit = async (data) => {
         // console.log(data)
         const image = data.image[0]
-        // console.log(image)
+        console.log(image)
        
         const postedInfo = {
             name: user?.displayName,
@@ -53,6 +54,15 @@ const AddScholarship = () => {
         }
         const scholarshipRes=await axiosPublic.post('/scholarship',addScholarshipData)
         console.log(scholarshipRes.data)
+        if(scholarshipRes.data.insertedId){
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: `${data.scholarshipName} added database successfully`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
     }
     return (
         <div>
