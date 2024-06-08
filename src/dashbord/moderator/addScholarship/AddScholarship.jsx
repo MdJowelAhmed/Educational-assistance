@@ -49,6 +49,7 @@ const AddScholarship = () => {
                 serviceCharge: data.serviceCharge,
                 postDate: data.postDate,
                 deadline: data.deadline,
+                rating:data.rating,
                 postedInfo,
                 image: image_url
         }
@@ -56,7 +57,7 @@ const AddScholarship = () => {
         console.log(scholarshipRes.data)
         if(scholarshipRes.data.insertedId){
             Swal.fire({
-                position: "top-center",
+                position: "top-end",
                 icon: "success",
                 title: `${data.scholarshipName} added database successfully`,
                 showConfirmButton: false,
@@ -65,13 +66,13 @@ const AddScholarship = () => {
         }
     }
     return (
-        <div>
-            <h2 className=" text-4xl font-lato px-16 text-center">Create a new scholarship</h2>
-            <p className="px-16 text-center">The Global Visionary Leaders Scholarship supports exceptional students in <br /> Agriculture, Engineering, and Medicine. Awarded for academic excellence <br /> and leadership, it provides financial aid</p>
+        <div className="bg-base-200 pt-12 rounded-2xl">
+            <h2 className=" text-5xl font-lato px-16 text-center mb-2">Create a new scholarship</h2>
+            <p className="px-16 text-center font-lato">The Global Visionary Leaders Scholarship supports exceptional students in <br /> Agriculture, Engineering, and Medicine. Awarded for academic excellence <br /> and leadership, it provides financial aid</p>
             {/* <AddScholarShipForm></AddScholarShipForm> */}
-            <div>
+            <div className="bg-base-200 rounded-2xl">
                 <div>
-                    <div className="bg-base-100 rounded-3xl">
+                    <div className="bg-base-200 rounded-3xl">
 
                         <form onSubmit={handleSubmit(onSubmit)} className=" m-2 mx-auto lg:p-12">
                             {/* scholarship and university name  */}
@@ -220,10 +221,18 @@ const AddScholarship = () => {
 
                                     <div className="form-control w-full">
                                         <label className="label">
+                                            <span className="label-text">Rating</span>
+                                        </label>
+                                        <input {...register("rating", )} type="text" name="rating"  placeholder="Rating" className="input input-bordered"  required/>
+                                        </div>
+                                        {errors.rating && <span className="text-red-600 font-lato">Rating must be 3-5 </span>}
+
+                                    <div className="form-control w-full">
+                                        <label className="label">
                                             <span className="label-text">Email</span>
                                         </label>
                                         <input {...register("email", )} type="text" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" disabled />
-                                        {/* {errors.email && <span>Your email is must give this field</span>} */}
+                                        
                                     </div>
                                 </div>
                             </div>
