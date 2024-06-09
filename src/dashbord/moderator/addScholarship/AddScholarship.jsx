@@ -39,7 +39,7 @@ const AddScholarship = () => {
                 scholarshipName: data.scholarshipName,
                 universityName: data.universityName,
                 universityCountry: data.universityCountry,
-                UniversityCity: data.UniversityCity,
+                UniversityCity: data.universityCity,
                 worldRange: data.worldRange,
                 subjectCategory: data.subjectCategory,
                 scholarshipCategory: data.scholarshipCategory,
