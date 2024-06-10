@@ -12,6 +12,7 @@ import {
 } from 'firebase/auth'
 import app from '../../firebase/Firebase.config'
 import useAxiosPublic from '../../Hooks/usePublic'
+import axios from 'axios'
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -49,11 +50,27 @@ const AuthProvider = ({ children }) => {
     })
   }
 
+  const saveUser = async user => {
+    const currentUser = {
+      email: user?.email,
+      name:user.displayName,
+      role: 'normalUser',
+    
+    }
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BASED_URL}users`,
+      currentUser
+    )
+    return data
+  }
+
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
         setUser(currentUser);
+       
         if (currentUser) {
+          saveUser(currentUser)
             // get token and store client
             const userInfo = { email: currentUser.email };
             axiosPublic.post('/jwt', userInfo)
@@ -65,7 +82,7 @@ const AuthProvider = ({ children }) => {
                 })
         }
         else {
-            // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+           
             localStorage.removeItem('access-token');
             setLoading(false);
         }

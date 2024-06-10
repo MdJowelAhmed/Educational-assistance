@@ -6,12 +6,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../Hooks/usePublic";
 
 
 // const image_hosting_key = import.meta.env.IMAGE_SECRET_API;
 // const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const Register = () => {
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
     const { createUser, updateUserProfile, signInWithGoogle } = useAuth()
     const {
         register,
@@ -22,7 +24,7 @@ const Register = () => {
     const onSubmit = async (data) => {
         // const formData = new FormData();
         // formData.append('image', data.image[0]);
-       
+
 
         const image = data.image[0]
         // console.log(image)
@@ -32,16 +34,27 @@ const Register = () => {
             // console.log(image_url)
             const result = await createUser(data.email, data.password)
             console.log(result.user)
-
             await updateUserProfile(data.name, image_url)
-            navigate('/')
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: `${data.name} register successfully`,
-                showConfirmButton: false,
-                timer: 1500
-              });
+
+            const userInfo = {
+                name: data.name,
+                email: data.email,
+                role: 'normalUser',
+            }
+            const userRes = await axiosPublic.post('/users', userInfo)
+            console.log(userRes.data)
+            if (userRes.data.insertedId) {
+                navigate('/')
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: `${data.name} register successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+           
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -51,10 +64,15 @@ const Register = () => {
     // social register 
     const handleGoogleSignIn = async () => {
         try {
-            await signInWithGoogle()
-
+           await signInWithGoogle()
             navigate('/')
-            toast.success('Signup Successful')
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: ` register successfully`,
+                showConfirmButton: false,
+                timer: 1500
+            });
         } catch (err) {
             console.log(err)
             toast.error(err.message)
@@ -103,13 +121,14 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("password", { required: true , minLength:6,
-                                 pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/
+                            <input {...register("password", {
+                                required: true, minLength: 6,
+                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/
                             })} type="password" name="password" placeholder="************" className="input input-bordered" />
-                            {errors.password?.type==='required'&& <span className="text-red-600 font-lato">This field is required</span>}
-                            {errors.password?.type==='minLength'&& <span className="text-red-600 font-lato">Password must be min 6 characters</span>}
-                            {errors.password?.type==='pattern'&& <span className="text-red-600 font-lato">Password must have one Uppercase one lower case and one special character</span>}
-                           
+                            {errors.password?.type === 'required' && <span className="text-red-600 font-lato">This field is required</span>}
+                            {errors.password?.type === 'minLength' && <span className="text-red-600 font-lato">Password must be min 6 characters</span>}
+                            {errors.password?.type === 'pattern' && <span className="text-red-600 font-lato">Password must have one Uppercase one lower case and one special character</span>}
+
                         </div>
 
                         <input type="submit" value="Register" className="btn bg-gradient-to-r from-cyan-500 to-blue-500 w-full mt-10 text-white" />
