@@ -39,7 +39,7 @@ const AddScholarship = () => {
                 scholarshipName: data.scholarshipName,
                 universityName: data.universityName,
                 universityCountry: data.universityCountry,
-                UniversityCity: data.universityCity,
+                universityCity: data.universityCity,
                 worldRange: data.worldRange,
                 subjectCategory: data.subjectCategory,
                 scholarshipCategory: data.scholarshipCategory,
@@ -94,7 +94,7 @@ const AddScholarship = () => {
                                     </div>
                                 </div>
 
-                                {/* image nad university country  */}
+                                {/* image and university country  */}
                                 <div className="flex gap-4 md:gap-8">
                                     <div className="form-control w-full">
                                         <label className="label">
@@ -118,8 +118,8 @@ const AddScholarship = () => {
                                         <label className="label">
                                             <span className="label-text">University City</span>
                                         </label>
-                                        <input {...register("UniversityCity", { required: true })} type="text" name="UniversityCity" placeholder="University City" className="input input-bordered" />
-                                        {errors.UniversityCity && <span className="text-red-600 font-lato">Fill up the University City </span>}
+                                        <input {...register("universityCity", { required: true })} type="text" name="universityCity" placeholder="University City" className="input input-bordered" />
+                                        {errors.universityCity && <span className="text-red-600 font-lato">Fill up the University City </span>}
                                     </div>
                                     <div className="form-control w-full">
                                         <label className="label">

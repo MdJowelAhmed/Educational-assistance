@@ -9,6 +9,7 @@ import AddScholarship from "../dashbord/moderator/addScholarship/AddScholarship"
 import Dashboard from "./Dashboard/Dashboard";
 import ManageScholarship from "../dashbord/moderator/manageScholarship/ManageScholarship";
 import ModeratorProfile from "../dashbord/moderator/moderatorProfile/ModeratorProfile";
+import ViewDetails from "../pages/Details/ViewDetails";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>
+            },
+            {
+                path:'/viewDetails/:id',
+                element:<ViewDetails></ViewDetails>
             },
             {
                 path:'/allScholarship',

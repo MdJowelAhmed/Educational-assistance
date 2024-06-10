@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useScholarship from "../../../Hooks/useScholarship";
 
 
@@ -30,7 +31,7 @@ const AllScholarship = () => {
                                     <div className="flex justify-between">
                                         <p>{scholarship.applicationFee} </p>
                                         <div className="card-actions justify-end">
-                                            <button className="btn btn-primary">Details</button>
+                                            <Link to={`/viewDetails/${scholarship._id}`}><button className="btn btn-primary">Details</button></Link>
                                         </div>
                                     </div>
                                 </div>
