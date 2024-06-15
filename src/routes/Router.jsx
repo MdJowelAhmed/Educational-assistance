@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import ManageScholarship from "../dashbord/moderator/manageScholarship/ManageScholarship";
 import ModeratorProfile from "../dashbord/moderator/moderatorProfile/ModeratorProfile";
 import ViewDetails from "../pages/Details/ViewDetails";
+import PaymentPage from "../pages/payment/PaymentPage";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path:'/allScholarship',
                 element:<AllScholarship></AllScholarship>
+            },
+            {
+                path:'/payment',
+                element:<PaymentPage></PaymentPage>
             },
             {
                 path:'/register',

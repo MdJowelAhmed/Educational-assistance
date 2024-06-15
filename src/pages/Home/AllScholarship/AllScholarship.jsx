@@ -24,10 +24,12 @@ const AllScholarship = () => {
                                         <p>{scholarship.subjectCategory} </p>
                                         <p>{scholarship.scholarshipCategory} </p>
                                     </div>
+                                 
                                     <div className="flex justify-between">
                                         <p>{scholarship.universityCountry} </p>
                                         <p>{scholarship.UniversityCity} </p>
                                     </div>
+                                    <div className=" border-dotted border-2 border-amber-300 w-full"></div>
                                     <div className="flex justify-between">
                                         <p>{scholarship.applicationFee} </p>
                                         <div className="card-actions justify-end">
