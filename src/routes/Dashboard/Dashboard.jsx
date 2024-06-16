@@ -3,6 +3,7 @@ import SidebarLinks from "../../dashbord/SideBarLinks/SidebarLinks";
 import { MdLibraryAdd, MdManageHistory } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
+import { BsPeople } from "react-icons/bs";
 
 
 const Dashboard = () => {
@@ -14,6 +15,8 @@ const Dashboard = () => {
                 <SidebarLinks label={'Manage Scholarship'} address={'/dashboard/manageScholarship'} icon={MdManageHistory}></SidebarLinks>
 
                 <SidebarLinks label={'Moderator Profile'} address={'/dashboard/moderatorProfile'} icon={RxAvatar}></SidebarLinks>
+
+                <SidebarLinks label={'Manage Users'} address={'/dashboard/manageUsers'} icon={BsPeople}></SidebarLinks>
 
                 <SidebarLinks label={'Home'} address={'/'} icon={HiHome}></SidebarLinks>
             </div>

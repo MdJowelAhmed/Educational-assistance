@@ -11,6 +11,7 @@ import ManageScholarship from "../dashbord/moderator/manageScholarship/ManageSch
 import ModeratorProfile from "../dashbord/moderator/moderatorProfile/ModeratorProfile";
 import ViewDetails from "../pages/Details/ViewDetails";
 import PaymentPage from "../pages/payment/PaymentPage";
+import ManageUsers from "../dashbord/admin/manageUsers/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
                 element:<AllScholarship></AllScholarship>
             },
             {
-                path:'/payment',
+                path:'/payment/:id',
                 element:<PaymentPage></PaymentPage>
             },
             {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path:'moderatorProfile',
                 element:<ModeratorProfile></ModeratorProfile>
+            },
+            {
+                path:'manageUsers',
+                element: <ManageUsers></ManageUsers>
             },
         ]
     }

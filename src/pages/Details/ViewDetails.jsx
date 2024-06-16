@@ -16,7 +16,7 @@ const ViewDetails = () => {
                 return data
             }
         })
-    const { image, universityName, scholarshipName, universityCountry, universityCity, worldRange, tuitionFee, applicationFee, serviceCharge, deadline, postDate, subjectCategory, degree, scholarshipCategory } = scholarship
+    const {_id, image, universityName, scholarshipName, universityCountry, universityCity, worldRange, tuitionFee, applicationFee, serviceCharge, deadline, postDate, subjectCategory, degree, scholarshipCategory } = scholarship
     console.log(scholarship)
     return (
         <div>
@@ -95,6 +95,7 @@ const ViewDetails = () => {
 
                                 </div>
                                 <div className=" border-dotted border-2 border-amber-300 w-full"></div>
+                                
                                 <div className="flex justify-between md:mr-8">
 
                                     <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
@@ -136,7 +137,7 @@ const ViewDetails = () => {
                         <div className="w-full mt-8 bg-transparent border rounded-md lg:max-w-sm dark:border-gray-700 focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 dark:focus-within:border-blue-400 focus-within:ring-opacity-40">
 
                         </div>
-                       <Link to='/payment'> <button className="btn w-2/3 mx-auto md:ml-16 bg-gradient-to-r from-cyan-500 to-blue-500">Apply Now</button></Link>
+                       <Link to={`/payment/${_id}`}> <button className="btn w-2/3 mx-auto md:ml-16 bg-gradient-to-r from-cyan-500 to-blue-500">Apply Now</button></Link>
                     </div>
 
                     <div className="flex items-center justify-center w-full relative  h-96 lg:w-1/2">
