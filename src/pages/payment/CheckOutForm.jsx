@@ -17,6 +17,7 @@ const CheckOutForm = () => {
     const elements = useElements();
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
+    const [isOpen, setIsOpen] = useState(false)
     
     const { data: scholarship = {}, isLoading,
         refetch, } = useQuery({
@@ -32,12 +33,16 @@ const CheckOutForm = () => {
     const totalFee = parseInt(tuition + applied + service)
     // console.log(totalFee)
 
+    const closeModal = () => {
+        setIsOpen(false)
+      }
+    
 
     useEffect(() => {
         if (totalFee > 0) {
             axiosSecure.post('/create-payment-intent', { total: totalFee })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -71,7 +76,7 @@ const CheckOutForm = () => {
             setError('');
         }
 
-console.log('74')
+// console.log('74')
         // confirm payment
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -85,7 +90,7 @@ console.log('74')
             }
         })
         
-console.log('745')
+// console.log('745')
         if (confirmError) {
             console.log('confirm error')
         }
@@ -98,21 +103,24 @@ console.log('745')
 
                 // now save the payment in the database
                 const payment = {
+                    ...scholarship,
                     email: user.email,
-                    price: totalFee,
+                    fee: totalFee,
                     transactionId: paymentIntent.id,
                     date: new Date(), // utc date convert. use moment js to 
                     status: 'pending'
-                }
+                } 
+                delete scholarship._id
+                console.log(scholarship)
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data);
                 refetch();
-                if (res.data?.result?.insertedId) {
+                if (res.data?.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Thank you for the taka paisa",
+                        title: "Payment successfully ",
                         showConfirmButton: false,
                         timer: 1500
                     });
