@@ -42,7 +42,7 @@ const CheckOutForm = () => {
         if (totalFee > 0) {
             axiosSecure.post('/create-payment-intent', { total: totalFee })
                 .then(res => {
-                    // console.log(res.data.clientSecret);
+                    console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -109,9 +109,7 @@ const CheckOutForm = () => {
                     transactionId: paymentIntent.id,
                     date: new Date(), // utc date convert. use moment js to 
                     status: 'pending'
-                } 
-                delete scholarship._id
-                console.log(scholarship)
+                }
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data);

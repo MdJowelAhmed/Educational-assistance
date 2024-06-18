@@ -12,11 +12,15 @@ import ModeratorProfile from "../dashbord/moderator/moderatorProfile/ModeratorPr
 import ViewDetails from "../pages/Details/ViewDetails";
 import PaymentPage from "../pages/payment/PaymentPage";
 import ManageUsers from "../dashbord/admin/manageUsers/ManageUsers";
+import AllReview from "../dashbord/moderator/allReview/AllReview";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Statics from "../dashbord/Statics";
 
 const router = createBrowserRouter([
     {
         path:'/',
         element: <Root></Root>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -49,6 +53,10 @@ const router = createBrowserRouter([
         element:<Dashboard></Dashboard>,
         children:[
             {
+                path:'statics',
+                element:<Statics></Statics>
+            },
+            {
                 path:'addScholarship',
                 element:<AddScholarship></AddScholarship>
             },
@@ -63,6 +71,14 @@ const router = createBrowserRouter([
             {
                 path:'manageUsers',
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path:'manageUsers',
+                element: <ManageUsers></ManageUsers>
+            },
+            {
+                path:'allReview',
+                element:<AllReview></AllReview>
             },
         ]
     }

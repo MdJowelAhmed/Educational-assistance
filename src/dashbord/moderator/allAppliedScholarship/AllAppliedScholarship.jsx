@@ -1,10 +1,10 @@
 
 
 const AllAppliedScholarship = () => {
+    
     return (
         <div>
-            AllAppliedScholarship
-            AllAppliedScholarship
+           
         </div>
     );
 };

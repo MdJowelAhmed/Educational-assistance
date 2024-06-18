@@ -8,9 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../Hooks/usePublic";
 
-
-// const image_hosting_key = import.meta.env.IMAGE_SECRET_API;
-// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const Register = () => {
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
@@ -22,10 +19,6 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        // const formData = new FormData();
-        // formData.append('image', data.image[0]);
-
-
         const image = data.image[0]
         // console.log(image)
 
