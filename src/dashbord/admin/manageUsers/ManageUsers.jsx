@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import Spinner from "../../../pages/Spinner/Spinner";
 
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch,isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users'); 
@@ -58,7 +59,7 @@ const ManageUsers = () => {
             }
         });
     }
-   
+    if (isLoading) return <Spinner />
     return (
         <div>
             <div className="flex justify-evenly my-4">

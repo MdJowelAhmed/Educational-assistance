@@ -106,7 +106,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input {...register("email", { required: true })} type="text" name="email" placeholder="Email" className="input input-bordered" />
+                            <input {...register("email", { required: true })} type="email" name="email" placeholder="Email" className="input input-bordered" />
                             {errors.email && <span>Your email is must give this field</span>}
                         </div>
 

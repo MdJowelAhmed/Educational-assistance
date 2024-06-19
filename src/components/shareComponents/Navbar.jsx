@@ -1,10 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { RxAvatar } from "react-icons/rx";
 
 
 const Navbar = () => {
     const { user, logOut } = useAuth()
+    const navigate=useNavigate()
     const navLinks = <>
         <li><NavLink to='/' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500 " : "btn mx-3"}>Home</NavLink></li>
         <li><NavLink to='/allScholarship' className={({ isActive }) => isActive ? "btn  bg-gradient-to-r from-cyan-500 to-blue-500" : "btn  mx-3"}>All Scholarship</NavLink></li>
@@ -12,7 +13,9 @@ const Navbar = () => {
 
 const handleLogOut = () => {
     logOut()
-        .then(() => { })
+        .then(() => {
+            navigate('/login')
+         })
         .catch(error => console.log(error));
 }
     return (

@@ -6,7 +6,7 @@ const TopScholarship = () => {
     console.log(scholarship)
     return (
         <div>
-            
+            topScholarship
         </div>
     );
 };

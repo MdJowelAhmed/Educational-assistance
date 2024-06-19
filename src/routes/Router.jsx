@@ -15,6 +15,7 @@ import ManageUsers from "../dashbord/admin/manageUsers/ManageUsers";
 import AllReview from "../dashbord/moderator/allReview/AllReview";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Statics from "../dashbord/Statics";
+import AllAppliedScholarship from "../dashbord/moderator/allAppliedScholarship/AllAppliedScholarship";
 
 const router = createBrowserRouter([
     {
@@ -73,9 +74,10 @@ const router = createBrowserRouter([
                 element: <ManageUsers></ManageUsers>
             },
             {
-                path:'manageUsers',
-                element: <ManageUsers></ManageUsers>
+                path:'allApplied',
+                element: <AllAppliedScholarship></AllAppliedScholarship>
             },
+           
             {
                 path:'allReview',
                 element:<AllReview></AllReview>
