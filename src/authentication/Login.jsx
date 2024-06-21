@@ -4,10 +4,12 @@ import useAuth from "../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const Login = () => {
     const {user,signInWithGoogle,signIn}=useAuth()
+    const [error,setError]=useState('')
     const navigate=useNavigate()
     const {
         register,
@@ -27,7 +29,7 @@ const Login = () => {
             }
               catch (err) {
                 console.log(err)
-                toast.error(err.message)
+                setError(err.message)
             }
 
     }
@@ -80,8 +82,13 @@ const Login = () => {
                         </div>
 
                         <input type="submit" value="Login" className="btn text-white text-xl bg-gradient-to-r from-cyan-500 to-blue-500 w-full my-10" />
+                        <div>
+                        {
+                            error&& <p className="text-red-600 text-center">{error} </p>
+                        }
+                    </div>
                     </form>
-
+                   
                     {/* Google login  */}
                     <div className="text-center ">
 

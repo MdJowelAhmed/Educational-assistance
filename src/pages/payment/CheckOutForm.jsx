@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosPublic from "../../Hooks/usePublic";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -18,6 +18,7 @@ const CheckOutForm = () => {
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
     const [isOpen, setIsOpen] = useState(false)
+    const navigate=useNavigate()
     
     const { data: scholarship = {}, isLoading,
         refetch, } = useQuery({
@@ -42,7 +43,7 @@ const CheckOutForm = () => {
         if (totalFee > 0) {
             axiosSecure.post('/create-payment-intent', { total: totalFee })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -99,7 +100,7 @@ const CheckOutForm = () => {
             if (paymentIntent.status === 'succeeded') {
                 console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
-                console.log(setTransactionId)
+                // console.log(setTransactionId)
 
                 // now save the payment in the database
                 const payment = {
@@ -110,11 +111,12 @@ const CheckOutForm = () => {
                     date: new Date(), // utc date convert. use moment js to 
                     status: 'pending'
                 }
-
+                delete payment._id
+                console.log(payment)
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data);
                 refetch();
-                if (res.data?.insertedId) {
+                if (res?.data?.result?.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -122,7 +124,7 @@ const CheckOutForm = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                //     navigate('/dashboard/paymentHistory')
+                    
                 }
 
             }

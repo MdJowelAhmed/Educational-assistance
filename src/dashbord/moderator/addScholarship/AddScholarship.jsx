@@ -10,10 +10,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAxiosPublic from "../../../Hooks/usePublic";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const AddScholarship = () => {
     const { user } = useAuth()
+    const navigate=useNavigate()
     const axiosSecure=useAxiosSecure()
     const axiosPublic=useAxiosPublic()
     // const [startDate, setStartDate] = useState(new Date());
@@ -63,7 +65,9 @@ const AddScholarship = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
+              navigate('/allScholarship')
         }
+       
     }
     return (
         <div className="bg-base-200 pt-12 rounded-2xl">
