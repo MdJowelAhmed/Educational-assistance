@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
 import useScholarship from "../../../Hooks/useScholarship";
+import useAxiosPublic from "../../../Hooks/usePublic";
+import { useQuery } from "@tanstack/react-query";
 
 
 const TopScholarship = () => {
-    const [scholarship]=useScholarship()
-    console.log(scholarship)
+    // const [scholarship]=useScholarship()
+    const axiosPublic = useAxiosPublic()
+    const { data: scholarship = [], isPending: loading, refetch } = useQuery({
+        queryKey: ['scholarship'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`scholarshipLimit`);
+            return res.data;
+           
+        }
+        
+    })
     return (
-        <div>
+        <div className=" my-16">
+            <h2 className="text-5xl text-center mb-12">Top Scholarship</h2>
         <div className="grid grid-cols-1 md:gap-8 md:grid-cols-3 lg::grid-cols-3">
             {
                 scholarship.map(scholarship => <div key={scholarship._id}>

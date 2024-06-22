@@ -17,6 +17,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Statics from "../dashbord/Statics";
 import AllAppliedScholarship from "../dashbord/moderator/allAppliedScholarship/AllAppliedScholarship";
 import ApplyPage from "../pages/modal/ApplyPage";
+import PrivateRoute from "./privateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/viewDetails/:id',
-                element:<ViewDetails></ViewDetails>
+                element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>
             },
             {
                 path:'/allScholarship',
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/payment/:id',
-                element:<PaymentPage></PaymentPage>
+                element:<PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
             },
             {
                 path:'/register',
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
     },
     {
         path:'dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
                 path:'statics',

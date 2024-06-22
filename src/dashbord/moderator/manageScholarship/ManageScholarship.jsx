@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../../pages/Spinner/Spinner";
 
 
 const ManageScholarship = () => {
     const axiosSecure=useAxiosSecure()
 
-    const {data: scholarship = [], isPending: loading, refetch} = useQuery({
+    const {data: scholarship = [],  isLoading, refetch} = useQuery({
         queryKey: ['scholarship'], 
         queryFn: async() =>{
             const res = await axiosSecure.get('/scholarship');
@@ -45,6 +46,8 @@ const ManageScholarship = () => {
             }
         });
     }
+
+    if (isLoading) return <Spinner />
     return (
         <div>
         <div className="flex justify-evenly my-4">

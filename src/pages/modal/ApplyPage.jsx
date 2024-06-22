@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { imageUpload } from "../../api/ImageApi";
+import Spinner from "../Spinner/Spinner";
 
 
 const ApplyPage = () => {
@@ -44,6 +45,7 @@ console.log(scholarship)
             gender:data.gender,
             sscResult:data.sscResult,
             hscResult:data.hscResult,
+            scholarshipId:scholarship._id,
             // universityCountry: data.universityCountry,
             subjectCategory: data.subjectCategory,
             // scholarshipCategory: data.scholarshipCategory,
@@ -53,7 +55,7 @@ console.log(scholarship)
             applicantInfo:applicantInfo
         }
         console.log(applyData)
-        const applyRes=await axiosPublic.post('/apply',applyData)
+        const applyRes=await axiosPublic.post('http://localhost:5000/apply',applyData)
         console.log(applyRes.data)
         if(applyRes.data.insertedId){
             Swal.fire({
@@ -66,8 +68,11 @@ console.log(scholarship)
              
         }
     }
+    if (isLoading) return <Spinner />
     return (
         <div className="bg-base-200 p-5">
+            <h2 className="text-4xl text-center">Please fill up this form</h2>
+            <p className="text-center my-2">This form give your some important information  which information <br /> identity you...this form you give some personal  information <br /> and some academic information</p>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex gap-4 md:gap-8">
                     <div className="form-control w-full">
@@ -159,14 +164,14 @@ console.log(scholarship)
                         <label className="label">
                             <span className="label-text">University Name</span>
                         </label>
-                        <input defaultValue={scholarship.universityName} {...register("universityName",  { required: true })} type="text" name="universityName" placeholder="University Name" className="input input-bordered" />
+                        <input disabled defaultValue={scholarship.universityName} {...register("universityName",  )} type="text" name="universityName" placeholder="University Name" className="input input-bordered" />
                         {errors.universityName && <span className="text-red-600 font-lato">University name must be fill up</span>}
                     </div>
                     <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Subject category</span>
                         </label>
-                        <select defaultValue={scholarship.subjectCategory} {...register('subjectCategory', { required: true })}
+                        <select disabled defaultValue={scholarship.subjectCategory} {...register('subjectCategory', )}
                             className="select select-bordered w-full">
                             <option disabled value="default">Select a Subject</option>
                             <option value="agriculture">Agriculture</option>
