@@ -16,6 +16,7 @@ import AllReview from "../dashbord/moderator/allReview/AllReview";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Statics from "../dashbord/Statics";
 import AllAppliedScholarship from "../dashbord/moderator/allAppliedScholarship/AllAppliedScholarship";
+import ApplyPage from "../pages/modal/ApplyPage";
 
 const router = createBrowserRouter([
     {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
             {
                 path:'allReview',
                 element:<AllReview></AllReview>
+            },
+            {
+                path:'applyPage/:id',
+                element:<ApplyPage></ApplyPage>
             },
         ]
     }

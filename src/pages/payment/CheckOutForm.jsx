@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosPublic from "../../Hooks/usePublic";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -117,6 +117,7 @@ const CheckOutForm = () => {
                 console.log('payment saved', res.data);
                 refetch();
                 if (res?.data?.result?.insertedId) {
+                   navigate(`/dashboard/applyPage/${id}`)
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -130,6 +131,7 @@ const CheckOutForm = () => {
             }
         }
     }
+
     return (
         <div>
             <div className="bg-base-200 p-12 w-96 rounded-lg mb-10">
@@ -160,9 +162,11 @@ const CheckOutForm = () => {
                             },
                         }}
                     />
-                    <button className="btn btn-sm btn-primary my-4" type="submit" >
+                    {/* to={`/dashboard/applyPage/${scholarship._id}`} */}
+                     <button className="btn btn-sm btn-primary my-4" type="submit" >
                         Pay
                     </button>
+                  
                     <p className="text-red-600">{error}</p>
                     {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
                 </form>

@@ -48,12 +48,12 @@ const AllScholarship = () => {
     } 
 
     const handlePreviousPage=()=>{
-        if(currentPage >0){
+        if(currentPage >1){
             setCurrentPage(currentPage -1)
         }
     }
     const handleNextPage=()=>{
-        if(currentPage < pages.length-1){
+        if(currentPage < pages.length== 1){
             setCurrentPage(currentPage +1)
         }
     }
@@ -96,13 +96,14 @@ const AllScholarship = () => {
                 }
             </div>
             <div className="flex my-12 gap-4 lg:mx-20">
-                <button className="btn"> Previous</button>
+           
+                <button onClick={handlePreviousPage} className="btn"> Previous</button>
                 <div>
                     {
                         pages.map(btnNum => (<button onClick={() => handlePaginationButton(btnNum)} className={`${currentPage === btnNum ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white' : 'btn px-7  mx-1'}`} key={btnNum}> {btnNum}</button>))
                     }
                 </div>
-                <button className="btn"> Next</button>
+                <button onClick={handleNextPage} className="btn"> Next</button>
 
             </div>
         </div>
